@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Learn how to use the Firebase platform on the Web">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Video Surveillance System</title>
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+
+  
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Friendly Chat">
+  <meta name="theme-color" content="#303F9F">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Friendly Chat">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#303F9F">
+
+  <!-- Tile icon for Win8 -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+  <meta name="msapplication-navbutton-color" content="#303F9F">
+
+  <!-- Material Design Lite -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
+  <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+  <!-- App Styling -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+  <link rel="stylesheet" href="styles/index.css">
+
+  <!-- TODO: Enable First Input Delay polyfill library. -->
+  <!--  <script type="text/javascript">!function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);</script> -->
+
+
+  </head>
+  <body class="w3-black">
+    
+<body class="w3-black">
+
+  <!-- Icon Bar (Sidebar - hidden on small screens) -->
+  <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+      <!-- Avatar image in top left corner -->
+      <!-- <img src="https://img.icons8.com/material/64/000000/dome-camera.png" style="height:5px" >  -->
+      <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+          <i class="fa fa-home w3-xxlarge"></i>
+          <p>WORKING</p>
+      </a>
+
+      <a href="#map" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+          <i class="fa fa-eye w3-xxlarge"></i>
+          <p>MAP</p>
+      </a>
+      <a href="#people" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+          <i class="fa fa-envelope w3-xxlarge"></i>
+          <p>PEOPLE</p>
+      </a>
+      <a href="#criminals" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+          <i class="fa fa-envelope w3-xxlarge"></i>
+          <p>Criminals</p>
+      </a>
+      <a href="#suspects" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+          <i class="fa fa-envelope w3-xxlarge"></i>
+          <p>Suspects</p>
+      </a>
+      <a href="#camera" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+          <i class="fa fa-user w3-xxlarge"></i>
+          <p>CAMERA</p>
+      </a>
+      <a href="#notifications" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+          <i class="fa fa-envelope w3-xxlarge"></i>
+          <p>NOTIFI's</p>
+      </a>
+  </nav>
+
+  <!-- Navbar on small screens (Hidden on medium and large screens) -->
+  <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+      <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+          <a href="#" class="w3-bar-item w3-button" style="width:25% !important">WORKING</a>
+          <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">CAMERA</a>
+          <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">MAP</a>
+          <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">PEOPLE</a>
+          <a href="#notifications" class="w3-bar-item w3-button" style="width:25% !important">NOTIFICATIONS</a>
+      </div>
+  </div>
+   <!-- Header section containing logo -->
+   <header class="mdl-layout__header mdl-color-text--white mdl-color--dark-blue-700">
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+        <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+          <h3><i class="material-icons">chat_bubble_outline</i> Video Surveillance System</h3>
+        </div>
+        <div id="user-container">
+          <div hidden id="user-pic"></div>
+          <div hidden id="user-name"></div>
+          <button hidden id="sign-out" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+            Sign-out
+          </button>
+          <button id="sign-in" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">
+            <i class="material-icons">account_circle</i>Sign-in with Google
+          </button>
+        </div>
+      </div>
+    </header>
+
+
+  <!-- Page Content -->
+  <div class="w3-padding-large" id="main">
+      <!-- Header/Home -->
+      <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+          <h1 class="w3-jumbo"><span class="w3-hide-small">Public safety alerting system</h1>
+          
+      </header>
+
+      <!-- About Section -->
+      <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+          <h2 class="w3-text-light-grey">My Project</h2>
+          <hr style="width:200px" class="w3-opacity">
+          <p>
+              In the current field of human recognition, most of the research being performed currently is focused on re-identification
+              of different body images taken by several CCTV cameras.On the other hand, there is almost no research being performed on
+              how to track the suspect after the face recognition.The aim of this project is to reduce the mental burden and increasing the attention span, any automatic method that is
+              able to reliably alert the operator of the presence of objects or any anomalous situation is desirable and also detects if any fire accident occurs.
+              The main features of the project are analysing the activities of the people and reporting suspect to the police,Tracking the suspect after the face recognition,Object detection and tracking,Fire detection and alerting fire station.
+
+          </p>
+          <h3 class="w3-padding-16 w3-text-light-grey">VALUES</h3>
+          <p class="w3-wide">Accuracy</p>
+          <div class="w3-white">
+              <div class="w3-dark-grey" style="height:28px;width:95%"></div>
+          </div>
+          <p class="w3-wide">No of cameras</p>
+          <div class="w3-white">
+              <div class="w3-dark-grey" style="height:28px;width:85%"></div>
+          </div>
+          <p class="w3-wide">No of people</p>
+          <div class="w3-white">
+              <div class="w3-dark-grey" style="height:28px;width:80%"></div>
+          </div><br>
+
+          <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+              <div class="w3-quarter w3-section">
+                  <span class="w3-xlarge">11+</span><br>
+                  Cameras
+              </div>
+              <div class="w3-quarter w3-section">
+                  <span class="w3-xlarge">55+</span><br>
+                  People
+              </div>
+              <div class="w3-quarter w3-section">
+                  <span class="w3-xlarge">89+</span><br>
+                  Suspects
+              </div>
+              <div class="w3-quarter w3-section">
+                  <span class="w3-xlarge">150+</span><br>
+                  Features
+              </div>
+          </div>
+
+
+          <!-- Grid for pricing tables -->
+          <h3 class="w3-padding-16 w3-text-light-grey">Comparision</h3>
+          <div class="w3-row-padding" style="margin:0 -16px">
+              <div class="w3-half w3-margin-bottom">
+                  <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
+                      <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic Cam</li>
+                      <li class="w3-padding-16">System Design</li>
+                      <li class="w3-padding-16">Architecture</li>
+                      <li class="w3-padding-16">Storage</li>
+                      <li class="w3-padding-16">Support</li>
+
+                  </ul>
+              </div>
+
+              <div class="w3-half">
+                  <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
+                      <li class="w3-dark-grey w3-xlarge w3-padding-32">Pro Cam</li>
+                      <li class="w3-padding-16">Web Design</li>
+                      <li class="w3-padding-16">Photography</li>
+                      <li class="w3-padding-16">5GB Storage</li>
+                      <li class="w3-padding-16">Endless Support</li>
+
+                  </ul>
+              </div>
+              <!-- End Grid/Pricing tables -->
+          </div>
+
+          <!-- Testimonials -->
+          <h3 class="w3-padding-24 w3-text-light-grey">My Reputation</h3>
+          <table>
+              <tr>
+                  <td>
+                      <img src="https://firebasestorage.googleapis.com/v0/b/videosurveillancesystem-0104.appspot.com/o/vamsi.jpg?alt=media&token=2eec4fcd-4f9c-4c58-bd5f-01dd441eae67" class="w3-left w3-circle w3-margin-right" style="width:190px">
+                  </td>
+                  <td>
+                      <img src="https://firebasestorage.googleapis.com/v0/b/videosurveillancesystem-0104.appspot.com/o/tabassum.jpg?alt=media&token=215ffa66-1a78-4d19-8e32-20caa3403bff" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:190px">
+                  </td>
+                  <td>
+                      <img src="https://firebasestorage.googleapis.com/v0/b/videosurveillancesystem-0104.appspot.com/o/sumanth.jpg?alt=media&token=5660e718-8c43-420e-970d-f29df2dc0fa3" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:190px">
+                  </td>
+
+              </tr>
+              <tr>
+                  <td>
+                      <p><span class="w3-large w3-margin-right">VAMSI ANAMALUDI</span></p>
+                  </td>
+                  <td>
+                      <p><span class="w3-large w3-margin-right">TABASSUM KHATHEEJA</span></p>
+                  </td>
+                  <td>
+                      <p><span class="w3-large w3-margin-right">Sumanth S</span></p>
+                  </td>
+              </tr>
+
+          </table>
+          <!-- End About Section -->
+      </div>
+
+
+      <!--
+
+  <div class="w3-padding-64 w3-content" id="photos">
+      <h2 class="w3-text-light-grey">MAP</h2>
+      <hr style="width:200px" class="w3-opacity">
+
+
+      <div class="w3-row-padding" style="margin:0 -16px">
+          <div class="w3-half">
+              <img src="/w3images/wedding.jpg" style="width:100%">
+              <img src="/w3images/rocks.jpg" style="width:100%">
+              <img src="/w3images/sailboat.jpg" style="width:100%">
+          </div>
+
+          <div class="w3-half">
+              <img src="/w3images/underwater.jpg" style="width:100%">
+              <img src="/w3images/chef.jpg" style="width:100%">
+              <img src="/w3images/wedding.jpg" style="width:100%">
+              <img src="/w3images/p6.jpg" style="width:100%">
+          </div>
+
+      </div>
+
+  </div>
+  -->
+      <!-- Portfolio Section -->
+      <div class="w3-padding-84 w3-content w3-text-grey" id="map">
+          <h2 class="w3-text-light-grey">MAP</h2>
+          <hr style="width:200px" class="w3-opacity">
+          <iframe src="https://www.google.com/maps/d/embed?mid=14CWO_LHwUWYx5ZkUhxYL5s6GTQZZpYvg" width="1000" height="480"></iframe>
+      </div>
+
+       <!--    people database section-->
+      <div class="w3-padding-84 w3-content w3-text-grey" id="people">
+        <h2 class="w3-text-light-grey">PEOPLE</h2>
+        <hr style="width:200px" class="w3-opacity">
+          <div class="main-list" id="list_div">
+          <div class="list-item w3-row">
+              
+          </div>
+          <div class='list-item w3-row' id='peopleRow'>
+
+        </div>
+         </div>
+         <br><br>
+      </div>
+       <!--    criminals database section-->
+       <div class="w3-padding-84 w3-content w3-text-grey" id="criminals">
+        <h2 class="w3-text-light-grey">CRIMINALS</h2>
+        <hr style="width:200px" class="w3-opacity">
+          <div class="main-list" id="crime_div">
+          <div class="list-criminals">
+              
+          </div>
+         </div>
+      </div>
+      <br /><br />
+       <!--    SUSPECTS database section-->
+       <div class="w3-padding-84 w3-content w3-text-grey" id="suspects">
+        <h2 class="w3-text-light-grey">SUSPECTS</h2>
+        <hr style="width:200px" class="w3-opacity">
+          <div class="main-list" id="crime_div">
+          <div class="list-criminals">
+              
+          </div>
+          <div class='list-item w3-row' id='criminalRow'>
+
+        </div>
+         </div>
+      </div>
+      <br /><br />
+ 
+    
+
+
+      <div class="w3-padding-84 w3-content w3-text-grey" id="camera">
+          <br><br><br><br><br><br><br><br><br>
+          <h2 class="w3-text-light-grey">Camera</h2>
+          <hr style="width:200px" class="w3-opacity">
+
+
+          <div class="gallery">
+              <a target="_blank" href="#">
+                  <video width="178" height="202" controls autoplay><source src="images/Sample.mp4" type="video/mp4"></video>
+              </a>
+              <div class="desc">Camera 1</div>
+          </div>
+
+          <div class="gallery">
+              <a target="_blank" href="#">
+                  <video width="178" height="200" controls autoplay><source src="images/Sample.mp4" type="video/mp4"></video>
+              </a>
+              <div class="desc">Camera 2</div>
+          </div>
+
+          <div class="gallery">
+              <a target="_blank" href="#">
+                  <video width="178" height="200" controls autoplay><source src="images/Sample.mp4" type="video/mp4"></video>
+              </a>
+              <div class="desc">Camera 3</div>
+          </div>
+
+          <div class="gallery">
+              <a target="_blank" href="#">
+                  <video width="178" height="200" controls autoplay><source src="images/Sample.mp4" type="video/mp4"></video>
+              </a>
+              <div class="desc">Camera 4</div>
+          </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+<div class="w3-padding-84 w3-content w3-text-grey" id="notifications">
+  <br><br><br><br><br><br><br><br><br>
+  <h2 class="w3-text-light-grey">NOTIFICATIONS SENT</h2>
+  <hr style="width:200px" class="w3-opacity">
+
+  <!-- Messages container -->
+  <div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
+    <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+      <div id="messages">
+      </div>
+      <form id="message-form" action="#">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" type="text" id="message" autocomplete="off">
+          <label class="mdl-textfield__label" for="message">Message...</label>
+        </div>
+        <button id="submit" disabled type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+          Send
+        </button>
+      </form>
+      <form id="image-form" action="#">
+        <input id="mediaCapture" type="file" accept="image/*" capture="camera">
+        <button id="submitImage" title="Add an image" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--amber-400 mdl-color-text--white">
+          <i class="material-icons">image</i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+  
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+
+
+  <!-- END PAGE CONTENT -->
+  </div>
+
+
+
+
+
+
+   
+   <!-- Import and configure the Firebase SDK -->
+<!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
+<!-- If you do not want to serve/host your project using Firebase Hosting see https://firebase.google.com/docs/web/setup -->
+<script src="/__/firebase/7.8.1/firebase-app.js"></script>
+<script src="/__/firebase/7.8.1/firebase-auth.js"></script>
+<script src="/__/firebase/7.8.1/firebase-storage.js"></script>
+<script src="/__/firebase/7.8.1/firebase-messaging.js"></script>
+<script src="/__/firebase/7.8.1/firebase-firestore.js"></script>
+<script src="/__/firebase/7.8.1/firebase-performance.js"></script>
+<script src="/__/firebase/init.js"></script>
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <script src="scripts/index.js"></script>
+  </body>
+</html>
